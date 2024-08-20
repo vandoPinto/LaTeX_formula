@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fórmulas Matemáticas Copiáveis</title>
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+    <style>
+        .latex-code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f5f5f5;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+            cursor: pointer;
+        }
+
+        .latex-code:hover {
+            background-color: #e1e1e1;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+        }
+
+        .input-form {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="input-form">
+        <h1>Insira seu código LaTeX copiado do Word:</h1>
+        <textarea id="latex-input" placeholder="Digite seu código LaTeX aqui..."></textarea>
+        <button onclick="renderLatex()">Renderizar e Copiar</button>
+    </div>
+
+    <div class="output" id="latex-output">
+        <!-- Fórmula renderizada será exibida aqui -->
+    </div>
+    <h1>Fórmulas Matemáticas Copiáveis</h1>
+
+    <p>Clique em uma fórmula para copiá-la para a área de transferência:</p>
+
+    <p>Equação de Einstein:</p>
+    <div class="latex-code" onclick="copyToClipboard('E = mc^2')">
+        \[ E = mc^2 \]
+    </div>
+
+    <p>Integral de uma função:</p>
+    <div class="latex-code" onclick="copyToClipboard('\\int_{a}^{b} f(x) \\, dx')">
+        \[ \int_{a}^{b} f(x) \, dx \]
+    </div>
+
+    <p>Teorema de Pitágoras:</p>
+    <div class="latex-code" onclick="copyToClipboard('a^2 + b^2 = c^2')">
+        \[ a^2 + b^2 = c^2 \]
+    </div>
+
+
+
+    <script>
+        function copyToClipboard(latex) {
+            const textarea = document.createElement('textarea');
+            textarea.value = latex;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Fórmula copiada! Agora você pode colar no Word.');
+        }
+
+        function renderLatex() {
+            const input = document.getElementById('latex-input').value;
+            const output = document.getElementById('latex-output');
+
+            // Atualiza o conteúdo do output com o código LaTeX
+            output.innerHTML = `\\[ ${input} \\]`;
+
+            // Atualiza o MathJax para renderizar o novo conteúdo
+            MathJax.typeset();
+
+            // Copia o código LaTeX para a área de transferência
+            copyToClipboard(input);
+        }
+    </script>
+</body>
+
+</html>
